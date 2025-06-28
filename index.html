@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ads Courses</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+      padding: 0;
+    }
+
+    header {
+      background: #1d1d1d;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    .search-section {
+      text-align: center;
+      margin: 30px 20px 10px;
+    }
+
+    .search-section input {
+      width: 80%;
+      max-width: 400px;
+      padding: 12px 16px;
+      font-size: 16px;
+      border-radius: 30px;
+      border: 1px solid #888;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .courses {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+      padding: 30px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      color: #2c3e50;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 15px;
+    }
+
+    .card .tag {
+      display: inline-block;
+      background-color: #ff6b6b;
+      color: white;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+    }
+
+    .card button {
+      background: #1abc9c;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .card button:hover {
+      background: #16a085;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      .search-section input {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Top Advertising Courses</h1>
+    <p style="margin-top: 10px; color: #ccc;">Master Facebook, Google & YouTube Ads with Expert-Led Training</p>
+  </header>
+
+  <div class="search-section">
+    <input type="text" id="searchInput" placeholder="Search Ads Courses..." onkeyup="filterCourses()" />
+  </div>
+
+  <div class="courses" id="courseContainer">
+    <!-- Cards will be injected here -->
+  </div>
+
+  <script>
+    const courses = [
+      {
+        title: "Google Ads Mastery",
+        description: "Learn how to create search, display & video campaigns that convert.",
+        tag: "Google Ads",
+        link: "#"
+      },
+      {
+        title: "Meta (Facebook & Instagram) Ads",
+        description: "Grow your audience with targeted Facebook & Instagram ad strategies.",
+        tag: "Meta Ads",
+        link: "#"
+      },
+      {
+        title: "YouTube Ads Strategy",
+        description: "Create compelling YouTube ads and scale your video marketing ROI.",
+        tag: "YouTube Ads",
+        link: "#"
+      },
+      {
+        title: "LinkedIn Ads for B2B",
+        description: "Master targeting and conversions on LinkedIn for professional services.",
+        tag: "LinkedIn Ads",
+        link: "#"
+      },
+      {
+        title: "TikTok Ads Crash Course",
+        description: "Break into short-form video advertising with high-impact TikTok campaigns.",
+        tag: "TikTok Ads",
+        link: "#"
+      }
+    ];
+
+    function renderCourses(courseList) {
+      const container = document.getElementById('courseContainer');
+      container.innerHTML = '';
+      courseList.forEach(course => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <span class="tag">${course.tag}</span>
+          <h3>${course.title}</h3>
+          <p>${course.description}</p>
+          <button onclick="window.location.href='${course.link}'">View Course</button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterCourses() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      const filtered = courses.filter(c => 
+        c.title.toLowerCase().includes(query) || 
+        c.tag.toLowerCase().includes(query)
+      );
+      renderCourses(filtered);
+    }
+
+    // Initial render
+    renderCourses(courses);
+  </script>
+
+</body>
+</html>
